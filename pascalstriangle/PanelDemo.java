@@ -1,4 +1,4 @@
-package test;
+package pascalstriangle;
 
 import javax.swing.*;
 import java.awt.*;

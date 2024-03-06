@@ -1,3 +1,4 @@
+package pascalstriangle;
 /**
  * Name: Joshua Henderson
  * Date: February 29, 2024
