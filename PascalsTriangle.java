@@ -1,9 +1,8 @@
-
 /**
  * Name: Joshua Henderson
  * Date: February 29, 2024
  * Project: Word Search Program
- * Purpose: This program provides an interactive tool for generating Pascal's Triangle or providing an explanation with a 'default size' triangle (5 rows). 
+ * Purpose: This program provides an interactive tool for generating a Pascal's Triangle with a defined number of rows or, providing an explanation with a 'default size' triangle (5 rows). 
  */
 
 import java.util.ArrayList;
@@ -25,7 +24,7 @@ public class PascalsTriangle {
 			System.out.print("Enter your choice: ");
 
 			choice = scanner.nextInt();
-			
+
 			// switch statement for different choices
 			switch (choice) {
 				case 1:
@@ -65,14 +64,34 @@ public class PascalsTriangle {
 		displayOutput(triangle);
 	}
 
-	// 
+	//
 	private static String showFormula() {
-		StringBuilder sb  = new StringBuilder();
-		sb.append("\nThe Formula: (n+1)C(r) = (n)C(r - 1) + (n)C(r).");
-		sb.append("\nTriangular number pattern where each number is the sum of the two numbers above it (with 1s at the edges). It's useful in various fields like probability and combinatorics.");
+		final int wrapLength = 100; // Fixed character limit
+
+		StringBuilder sb = new StringBuilder();
+		String formula = "\nThe Formula: (n+1)C(r) = (n)C(r - 1) + (n)C(r).";
+		String description = "Triangular number pattern where each number is the sum of the two numbers above it (with 1s at the edges). It's useful in various fields like probability and combinatorics.";
+
+		// wrap formula text
+		int start = 0;
+		while (start < formula.length()) {
+			int end = Math.min(start + wrapLength, formula.length());
+			sb.append(formula.substring(start, end) + "\n");
+			start = end;
+		}
+
+		// wrap description text
+		start = 0;
+		while (start < description.length()) {
+			int end = Math.min(start + wrapLength, description.length());
+			sb.append(description.substring(start, end) + "\n");
+			start = end;
+		}
+
 		return sb.toString();
 	}
 
+	// recursively generate a list of lists for Pascal's Triangle
 	private static List<List<Integer>> generateRecursiveTriangle(int numRows) {
 		List<List<Integer>> triangle = new ArrayList();
 		for (int i = 0; i < numRows; i++) {
@@ -81,6 +100,7 @@ public class PascalsTriangle {
 		return triangle;
 	}
 
+	// generates a single row for the Triangle
 	private static List<Integer> generateRow(int rowNum) {
 		List<Integer> row = new ArrayList<>();
 		if (rowNum == 0) {
@@ -99,6 +119,7 @@ public class PascalsTriangle {
 		return row;
 	}
 
+	// display method for each triangle for output to the console
 	private static void displayOutput(List<List<Integer>> triangle) {
 		int maxRowLength = triangle.get(triangle.size() - 1).size();
 		System.out.println();
